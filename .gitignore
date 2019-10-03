@@ -1,0 +1,10 @@
+
+### Gradle ###
+.gradle
+/build/
+
+## Intellij
+.idea
+
+## Misc
+gs-spring-boot.iml
