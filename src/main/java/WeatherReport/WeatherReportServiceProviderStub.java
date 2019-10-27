@@ -9,6 +9,8 @@ public class WeatherReportServiceProviderStub {
         WeatherReportWeatherModel weatherReportWeatherModel = new WeatherReportWeatherModel();
         weatherReportWeatherModel.setSummary("Rain Today");
         weatherReportWeatherModel.setNearestStormDistance(150);
+        weatherReportWeatherModel.setTemperature(50);
+
         return weatherReportWeatherModel;
     }
 }
