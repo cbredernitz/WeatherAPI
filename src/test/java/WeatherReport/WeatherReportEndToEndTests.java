@@ -37,6 +37,7 @@ public class WeatherReportEndToEndTests {
         WeatherReportWeatherModel expectedWeather = new WeatherReportWeatherModel();
         expectedWeather.setSummary("Rain Today");
         expectedWeather.setNearestStormDistance(150);
+        expectedWeather.setTemperature(50);
 
         MvcResult result = mockMvc.perform(get("/WeatherReport/location").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(weatherReportLocationModel)))

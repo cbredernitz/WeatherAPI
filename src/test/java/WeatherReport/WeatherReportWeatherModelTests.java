@@ -19,5 +19,11 @@ public class WeatherReportWeatherModelTests {
         weatherReportWeatherModel.setNearestStormDistance(100);
         assertEquals(weatherReportWeatherModel.getNearestStormDistance(), 100);
     }
+
+    @Test
+    public void givenWeatherTemperature_thenReturnTemperature() {
+        weatherReportWeatherModel.setTemperature(90);
+        assertEquals(weatherReportWeatherModel.getTemperature(), 90);
+    }
 }
 

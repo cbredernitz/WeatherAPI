@@ -15,7 +15,7 @@ public class WeatherReportServiceProviderStubTests {
     private Mockito mockito;
 
     @Test
-    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithSummary() {
+    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithSummaryRainToday() {
         WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
         weatherReportLocationModel.setLatitude(70.55);
         weatherReportLocationModel.setLongitude(110.38);
@@ -30,7 +30,7 @@ public class WeatherReportServiceProviderStubTests {
     }
 
     @Test
-    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithNearestStormDistance() {
+    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithNearestStormDistance150() {
         WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
         weatherReportLocationModel.setLatitude(70.55);
         weatherReportLocationModel.setLongitude(110.38);
@@ -42,5 +42,19 @@ public class WeatherReportServiceProviderStubTests {
 
         WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
         assertEquals(expectedWeather.getNearestStormDistance(), returnWeather.getNearestStormDistance());
+    }
+    @Test
+    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithTemperature50() {
+        WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
+        weatherReportLocationModel.setLatitude(70.55);
+        weatherReportLocationModel.setLongitude(110.38);
+
+        WeatherReportWeatherModel expectedWeather = new WeatherReportWeatherModel();
+        expectedWeather.setTemperature(50);
+
+        WeatherReportServiceProviderStub weatherReportServiceProviderStub = new WeatherReportServiceProviderStub();
+
+        WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
+        assertEquals(expectedWeather.getTemperature(), returnWeather.getTemperature());
     }
 }
