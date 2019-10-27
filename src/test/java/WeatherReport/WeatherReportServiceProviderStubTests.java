@@ -28,4 +28,19 @@ public class WeatherReportServiceProviderStubTests {
         WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
         assertEquals(expectedWeather.getSummary(), returnWeather.getSummary());
     }
+
+    @Test
+    public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithNearestStormDistance() {
+        WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
+        weatherReportLocationModel.setLatitude(70.55);
+        weatherReportLocationModel.setLongitude(110.38);
+
+        WeatherReportWeatherModel expectedWeather = new WeatherReportWeatherModel();
+        expectedWeather.setNearestStormDistance(150);
+
+        WeatherReportServiceProviderStub weatherReportServiceProviderStub = new WeatherReportServiceProviderStub();
+
+        WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
+        assertEquals(expectedWeather.getNearestStormDistance(), returnWeather.getNearestStormDistance());
+    }
 }
