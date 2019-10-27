@@ -1,8 +1,8 @@
-package WeatherReport.api.models;
+package WeatherReport;
 
-public class Location {
+public class WeatherReportLocationModel {
 
-    public Location() {}
+    public WeatherReportLocationModel() {}
 
     private double latitude;
     private double longitude;
