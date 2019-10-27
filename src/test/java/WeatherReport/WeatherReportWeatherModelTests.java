@@ -13,5 +13,11 @@ public class WeatherReportWeatherModelTests {
         weatherReportWeatherModel.setSummary("Rain");
         assertEquals(weatherReportWeatherModel.getSummary(), "Rain");
     }
+
+    @Test
+    public void givenWeatherNearestStormDistance_thenReturnNearestStormDistance() {
+        weatherReportWeatherModel.setNearestStormDistance(100);
+        assertEquals(weatherReportWeatherModel.getNearestStormDistance(), 100);
+    }
 }
 

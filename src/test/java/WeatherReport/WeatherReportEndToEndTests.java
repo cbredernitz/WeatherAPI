@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class WeatherReportControllerTest {
+public class WeatherReportEndToEndTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,19 +29,20 @@ public class WeatherReportControllerTest {
 
     @Test
     @DirtiesContext
-    public void givenWHelloEndpoint_thenReturnOk() throws Exception {
-        mockMvc.perform(get("/").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    @DirtiesContext
-    public void givenLocation_whenWeatherReportEndpointCalled_thenReturnOk() throws Exception {
+    public void givenLocation_whenWeatherReportEndpointCalled_thenReturnAccurateModel() throws Exception {
         WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
         weatherReportLocationModel.setLatitude(80.89);
         weatherReportLocationModel.setLongitude(157.89);
 
-        mockMvc.perform(get("/WeatherReport/location").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(weatherReportLocationModel)))
-                .andExpect(status().isOk());
+        WeatherReportWeatherModel expectedWeather = new WeatherReportWeatherModel();
+        expectedWeather.setSummary("Rain Today");
+        expectedWeather.setNearestStormDistance(150);
+
+        MvcResult result = mockMvc.perform(get("/WeatherReport/location").contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(weatherReportLocationModel)))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(objectMapper.writeValueAsString(expectedWeather), result.getResponse().getContentAsString());
     }
 }
