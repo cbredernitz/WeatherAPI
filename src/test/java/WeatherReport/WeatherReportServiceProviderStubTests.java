@@ -5,6 +5,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WeatherReportServiceProviderStubTests {
 
@@ -43,7 +44,7 @@ public class WeatherReportServiceProviderStubTests {
         WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
         assertEquals(expectedWeather.getNearestStormDistance(), returnWeather.getNearestStormDistance());
     }
-    @Test
+    @Test()
     public void givenLocation_whenGetWeatherCalled_thenReturnWeatherModelWithTemperature50() {
         WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
         weatherReportLocationModel.setLatitude(70.55);
@@ -56,5 +57,20 @@ public class WeatherReportServiceProviderStubTests {
 
         WeatherReportWeatherModel returnWeather = weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
         assertEquals(expectedWeather.getTemperature(), returnWeather.getTemperature());
+    }
+
+    @Test()
+    public void givenLocation9999and9999_whenGetWeatherCalled_thenThrowServicePrivoderDeadExeption() throws WeatherReportServiceProviderDeadException{
+        WeatherReportLocationModel weatherReportLocationModel = new WeatherReportLocationModel();
+        weatherReportLocationModel.setLatitude(99.99);
+        weatherReportLocationModel.setLongitude(99.99);
+
+        WeatherReportWeatherModel expectedWeather = new WeatherReportWeatherModel();
+
+        WeatherReportServiceProviderStub weatherReportServiceProviderStub = new WeatherReportServiceProviderStub();
+
+        assertThrows(WeatherReportServiceProviderDeadException.class, () -> {
+            weatherReportServiceProviderStub.getWeather(weatherReportLocationModel);
+        });
     }
 }

@@ -44,4 +44,5 @@ public class WeatherReportControllerTest {
         mockMvc.perform(get("/WeatherReport/location").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(weatherReportLocationModel)))
                 .andExpect(status().isOk());
     }
+
 }
